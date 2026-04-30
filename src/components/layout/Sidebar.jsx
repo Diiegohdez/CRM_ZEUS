@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom"
 import { RiHomeFill } from "react-icons/ri";
 import { CiUser, CiViewList, CiTimer, CiSettings, CiLogout } from "react-icons/ci";
 import { useAuth } from "../../context/AuthContext";
-import { act } from "react";
+import zeus_logo from "../../assets/zeus_logo.png";
+
 
 export default function Sidebar() {
 
@@ -23,7 +24,7 @@ export default function Sidebar() {
         <aside className="bg-[#171821] border-r border-gray-700 flex flex-col transition-all duration-300 w-20 lg:w-64 p-3">
             {/* espacio para logo */}
             <div className="h-16 flex items-center justify-center lg:justify-start lg:px-4">
-                <div className="w-8 h-8 bg-gray-600 rounded" />
+                <img src={zeus_logo} alt="Zeus_Logo" className="w-48 h-16"/>
             </div>
 
             {/* menú */}
