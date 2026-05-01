@@ -65,7 +65,7 @@ export default function Register() {
                     placeholder="Contraseña"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full p-3 mb-4 rounded bg-[#111827] border border-gray-600" required/>
+                    className="w-full p-3 mb-4 rounded bg-[#111827] border border-gray-600" required />
 
                 <PasswordInput
                     type="confirmPassword"
