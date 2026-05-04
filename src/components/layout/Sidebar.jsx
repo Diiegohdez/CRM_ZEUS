@@ -3,7 +3,7 @@ import { RiHomeFill } from "react-icons/ri";
 import { CiUser, CiViewList, CiTimer, CiSettings, CiLogout } from "react-icons/ci";
 import { useAuth } from "../../context/AuthContext";
 import zeus_logo from "../../assets/zeus_logo.png";
-
+import zeus_icon from "../../assets/zeus_icon.png";
 
 export default function Sidebar() {
 
@@ -23,8 +23,11 @@ export default function Sidebar() {
     return (
         <aside className="bg-[#171821] border-r border-gray-700 flex flex-col transition-all duration-300 w-20 lg:w-64 p-3">
             {/* espacio para logo */}
-            <div className="h-16 flex items-center justify-center lg:justify-start lg:px-4">
-                <img src={zeus_logo} alt="Zeus_Logo" className="w-48 h-16"/>
+            <div className="h-16 flex items-center justify-center lg:justify-start lg:hidden">
+                <img src={zeus_icon} alt="Zeus_Logo" className="w-48 h-16" />
+            </div>
+            <div className="hidden lg:block h-16 items-center justify-center lg:justify-start lg:px-4">
+                <img src={zeus_logo} alt="Zeus_Logo" className="w-48 h-16" />
             </div>
 
             {/* menú */}

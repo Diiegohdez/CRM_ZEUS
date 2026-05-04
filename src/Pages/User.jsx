@@ -68,6 +68,7 @@ export default function User() {
                             onChange={(e) => setPassword(e.target.value)}
                             className="bg-[#111827] p-3 rounded-lg text-white outline-none border border-gray-700 focus:border-[#A9DFD8]"
                             placeholder="Ingresa tu nueva contraseña"
+                            minLength={8}
                             required
                         />
                     

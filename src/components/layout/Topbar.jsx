@@ -1,5 +1,6 @@
 import { CiSearch, CiBellOn } from "react-icons/ci";
 import UserMenu from "../ui/dropdown";
+import NotificationsMenu from "../ui/NotificationsMenu";
 
 export default function Topbar() {
 
@@ -14,7 +15,7 @@ export default function Topbar() {
 
             {/* acciones */}
             <div className="flex items-center gap-4">
-                <CiBellOn size={20} className="text-white" />
+                <NotificationsMenu />
 
                 <UserMenu />
             </div>
