@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAutomation } from "../../context/AutomationContext";
 import { CiBellOn } from "react-icons/ci";
 export default function NotificationsMenu() {
@@ -7,6 +7,22 @@ export default function NotificationsMenu() {
     const { automations } = useAutomation(); // Obtener las automatizaciones desde el contexto de automatización
 
     const today = new Date(); // Obtener la fecha actual
+
+    const menuRef = useRef(); // Referencia al menú de notificaciones para detectar clics fuera del menú
+
+    // Efecto para cerrar el menú de notificaciones al hacer clic fuera de él
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setOpen(false); // Cerrar el menú si se hace clic fuera de él
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);// Agregar el evento de clic al documento
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside); // Limpiar el evento al desmontar el componente
+        };
+    }, []);
+
 
     const notifications = automations.map((a) => {
         const due = new Date(a.due_date); // Convertir la fecha de vencimiento de la automatización a un objeto Date
@@ -34,7 +50,7 @@ export default function NotificationsMenu() {
     }).filter(Boolean); // Filtrar las notificaciones para eliminar las que son null (automatizaciones completas)
 
     return (
-        <div className="relative">
+        <div ref={menuRef} className="relative">
             {/* Icono de campana para abrir el menú de notificaciones */}
             <button onClick={() => setOpen(!open)} className="relative text-gray-300 hover:text-white mt-1 mr-2">
                 <CiBellOn size={23} />

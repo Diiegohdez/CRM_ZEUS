@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
@@ -16,13 +16,28 @@ export default function UserMenu() {
     // Función para manejar el clic en la opción de cerrar sesión
     const navigate = useNavigate();
 
+    const menuRef = useRef(); // Referencia al menú desplegable para detectar clics fuera del menú
+
+    // Efecto para cerrar el menú desplegable al hacer clic fuera de él
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) { 
+                setIsOpen(false); // Cerrar el menú si se hace clic fuera de él
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside); // Agregar el evento de clic al documento
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside); // Limpiar el evento al desmontar el componente
+        };
+    }, []);
+
     const handleSignOut = async () => {
         await signOut(); // Llamar a la función de cierre de sesión del contexto de autenticación
         navigate("/login"); // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
     };
 
     return (
-        <div className="relative">
+        <div ref={menuRef} className="relative">
             {/* Avatar del usuario */}
             <div onClick={()=> setIsOpen(!isOpen)} className="w-10 h-10 bg-gray-600 rounded-full cursor-pointer flex items-center justify-center text-white font-bold">
                 {user?.email?.charAt(0).toUpperCase()}{/* Mostrar la primera letra del correo electrónico del usuario como avatar */}
